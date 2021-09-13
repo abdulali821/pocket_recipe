@@ -25,12 +25,13 @@ Widget customField(
         ),
       ],
     ),
-    child: TextField(
+    child: TextField(   
       onChanged: onChange,
       decoration: InputDecoration(
         prefixIcon: icon,
         hintText: hintText,
         border: InputBorder.none,
+
       ),
     ),
   );
