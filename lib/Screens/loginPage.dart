@@ -15,9 +15,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String? email;
-  String? password;
   String? error;
+  TextEditingController emailcontroller = TextEditingController();
+  TextEditingController passwordcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     Services myservices = Services(context);
@@ -57,20 +57,32 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 39.w, right: 43.w),
-              child: customField(50.h, 332.w, 80.r, MyColors.white,
-                  Color(0xffEEE2BE), Icon(Icons.person), 'Email', false, (val) {
-                email = val;
-              }),
+              child: customField(
+                  50.h,
+                  332.w,
+                  80.r,
+                  MyColors.white,
+                  Color(0xffEEE2BE),
+                  Icon(Icons.person),
+                  'Email',
+                  false,
+                  emailcontroller),
             ),
             SizedBox(
               height: 24.h,
             ),
             Padding(
               padding: EdgeInsets.only(left: 39.w, right: 43.w),
-              child: customField(50.h, 332.w, 80.r, MyColors.white,
-                  Color(0xffEEE2BE), Icon(Icons.lock), 'Password', true, (val) {
-                password = val;
-              }),
+              child: customField(
+                  50.h,
+                  332.w,
+                  80.r,
+                  MyColors.white,
+                  Color(0xffEEE2BE),
+                  Icon(Icons.lock),
+                  'Password',
+                  true,
+                  passwordcontroller),
             ),
             SizedBox(
               height: 72.h,
@@ -84,7 +96,8 @@ class _LoginPageState extends State<LoginPage> {
                 Colors.transparent,
                 80.r,
                 () {
-                  if (email == null && password == null) {
+                  if (emailcontroller.text == '' &&
+                      passwordcontroller.text == '') {
                     AwesomeDialog(
                             context: context,
                             animType: AnimType.SCALE,
@@ -110,9 +123,15 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(fontStyle: FontStyle.italic),
                         ),
                       ),
-                      btnCancelOnPress: () {},
+                      btnCancelOnPress: () {
+                        setState(() {
+                          emailcontroller.clear();
+                          passwordcontroller.clear();
+                        });
+                      },
                       btnOkOnPress: () {
-                        myservices.signup(email!, password!);
+                        myservices.signup(
+                            emailcontroller.text, passwordcontroller.text);
                         if (myservices.error == "exists") {
                           AwesomeDialog(
                                   context: context,
@@ -129,8 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                                   width: 350.w,
                                   btnOkColor: MyColors.lightYellow)
                               .show();
-                        } else {}
-                        // myservices.signup(email!, password!);
+                        }
                       },
                     ).show();
                   }

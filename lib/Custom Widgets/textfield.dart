@@ -10,7 +10,7 @@ Widget customField(
     Icon icon,
     String hintText,
     bool type,
-    Function(String value) onChange) {
+    TextEditingController onChange) {
   return Container(
     height: h,
     width: w,
@@ -27,7 +27,7 @@ Widget customField(
       ],
     ),
     child: TextField(
-      onChanged: onChange,
+      controller: onChange,
       autofocus: false,
       obscureText: type,
       autocorrect: false,

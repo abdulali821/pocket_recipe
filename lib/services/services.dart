@@ -21,29 +21,32 @@ class Services {
       });
     } on FirebaseAuthException catch (er) {
       if (er.code == 'weak-password') {
-        print('The password provided is too weak.');
+        myDialog('The password provided is too weak.');
       } else if (er.code == 'email-already-in-use') {
-        AwesomeDialog(
-                context: context,
-                animType: AnimType.SCALE,
-                dialogType: DialogType.WARNING,
-                body: Center(
-                  child: Text(
-                    'The user is already exist!',
-                    style: TextStyle(fontStyle: FontStyle.italic),
-                  ),
-                ),
-                btnOkOnPress: () {},
-                width: 350.w,
-                btnOkColor: MyColors.lightYellow)
-            .show();
-
-        ////////////
-
+        myDialog('User Already Exist');
+      } else if (er.code == 'invalid-email') {
+        myDialog('Email is invalid!');
       }
     } catch (error) {
       print(error.toString());
     }
+  }
+
+  void myDialog(String str) {
+    AwesomeDialog(
+            context: context,
+            animType: AnimType.SCALE,
+            dialogType: DialogType.WARNING,
+            body: Center(
+              child: Text(
+                str,
+                style: TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
+            btnOkOnPress: () {},
+            width: 350.w,
+            btnOkColor: MyColors.lightYellow)
+        .show();
   }
 
   void signin(String email, String password) async {
