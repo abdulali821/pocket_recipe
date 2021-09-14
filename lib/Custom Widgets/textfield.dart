@@ -9,6 +9,7 @@ Widget customField(
     Color shadColor,
     Icon icon,
     String hintText,
+    bool type,
     Function(String value) onChange) {
   return Container(
     height: h,
@@ -27,6 +28,10 @@ Widget customField(
     ),
     child: TextField(
       onChanged: onChange,
+      autofocus: false,
+      obscureText: type,
+      autocorrect: false,
+      enableSuggestions: false,
       decoration: InputDecoration(
         focusColor: Colors.black,
         prefixIcon: icon,

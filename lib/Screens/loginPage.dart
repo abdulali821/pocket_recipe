@@ -5,6 +5,7 @@ import 'package:pocket_recipe/Custom%20Widgets/colors.dart';
 import 'package:pocket_recipe/Custom%20Widgets/textfield.dart';
 import 'package:pocket_recipe/services/services.dart';
 import 'package:pocket_recipe/Custom%20Widgets/para.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -14,11 +15,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  Services myservices = Services();
   String? email;
   String? password;
+  String? error;
   @override
   Widget build(BuildContext context) {
+    Services myservices = Services(context);
     return Scaffold(
       backgroundColor: MyColors.white,
       body: SingleChildScrollView(
@@ -56,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: EdgeInsets.only(left: 39.w, right: 43.w),
               child: customField(50.h, 332.w, 80.r, MyColors.white,
-                  Color(0xffEEE2BE), Icon(Icons.person), 'Email', (val) {
+                  Color(0xffEEE2BE), Icon(Icons.person), 'Email', false, (val) {
                 email = val;
               }),
             ),
@@ -66,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: EdgeInsets.only(left: 39.w, right: 43.w),
               child: customField(50.h, 332.w, 80.r, MyColors.white,
-                  Color(0xffEEE2BE), Icon(Icons.lock), 'Password', (val) {
+                  Color(0xffEEE2BE), Icon(Icons.lock), 'Password', true, (val) {
                 password = val;
               }),
             ),
@@ -82,7 +84,56 @@ class _LoginPageState extends State<LoginPage> {
                 Colors.transparent,
                 80.r,
                 () {
-                  myservices.signup(email!, password!);
+                  if (email == null && password == null) {
+                    AwesomeDialog(
+                            context: context,
+                            animType: AnimType.SCALE,
+                            dialogType: DialogType.ERROR,
+                            body: Center(
+                              child: Text(
+                                'Email & Password must be filled!',
+                                style: TextStyle(fontStyle: FontStyle.italic),
+                              ),
+                            ),
+                            btnOkOnPress: () {},
+                            width: 350.w,
+                            btnOkColor: MyColors.lightYellow)
+                        .show();
+                  } else {
+                    AwesomeDialog(
+                      context: context,
+                      animType: AnimType.SCALE,
+                      dialogType: DialogType.SUCCES,
+                      body: Center(
+                        child: Text(
+                          'Are you sure to login',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ),
+                      btnCancelOnPress: () {},
+                      btnOkOnPress: () {
+                        myservices.signup(email!, password!);
+                        if (myservices.error == "exists") {
+                          AwesomeDialog(
+                                  context: context,
+                                  animType: AnimType.SCALE,
+                                  dialogType: DialogType.ERROR,
+                                  body: Center(
+                                    child: Text(
+                                      'The user is already exist!',
+                                      style: TextStyle(
+                                          fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                  btnOkOnPress: () {},
+                                  width: 350.w,
+                                  btnOkColor: MyColors.lightYellow)
+                              .show();
+                        } else {}
+                        // myservices.signup(email!, password!);
+                      },
+                    ).show();
+                  }
                 },
                 Customtext('LOGIN', MyColors.darkBlack, 20.sp, FontWeight.w600,
                     TextAlign.center),
