@@ -53,7 +53,7 @@ class Services {
     await auth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      Get.to(Home());
+      Get.off(Home());
     });
   }
 }

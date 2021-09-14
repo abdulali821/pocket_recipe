@@ -66,10 +66,13 @@ class _OnboardState extends State<OnBoard> {
                   elevation: 20,
                   sliderButtonIconSize: 30.h,
                   sliderRotate: true,
-                  sliderButtonIcon: Icon(Icons.arrow_forward),
+                  sliderButtonIcon: Container(
+                      height: 28.h,
+                      width: 28.w,
+                      child: Icon(Icons.arrow_forward)),
                   innerColor: MyColors.lightYellow,
                   outerColor: MyColors.white,
-                  animationDuration: Duration(seconds: 1),
+                  animationDuration: Duration(milliseconds: 800),
                   submittedIcon: Icon(
                     Icons.done,
                     size: 40.h,
