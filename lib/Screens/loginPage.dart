@@ -23,190 +23,195 @@ class _LoginPageState extends State<LoginPage> {
     Services myservices = Services(context);
     return Scaffold(
       backgroundColor: MyColors.white,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 70.h,
-            ),
-            Image.asset('assets/logo/logo2.png'),
-            Container(
-              child: Row(
+      body: Container(
+        height: 896.4.h,
+        width: 411.4.w,
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 70.h,
+              ),
+              Image.asset('assets/logo/logo2.png'),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Customtext('POCKET', MyColors.darkBlack, 22, FontWeight.w500,
+                        TextAlign.center),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Customtext('RECIPE', MyColors.yellow, 22, FontWeight.w500,
+                        TextAlign.center),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 65.33.h,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: 145.w, left: 39.w),
+                child: Customtext('Login to your Account', MyColors.darkBlack,
+                    18.sp, FontWeight.w400, TextAlign.start),
+              ),
+              SizedBox(
+                height: 40.h,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 39.w, right: 43.w),
+                child: customField(
+                    50.h,
+                    332.w,
+                    80.r,
+                    MyColors.white,
+                    Color(0xffEEE2BE),
+                    Icon(Icons.person),
+                    'Email',
+                    false,
+                    emailcontroller),
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 39.w, right: 43.w),
+                child: customField(
+                    50.h,
+                    332.w,
+                    80.r,
+                    MyColors.white,
+                    Color(0xffEEE2BE),
+                    Icon(Icons.lock),
+                    'Password',
+                    true,
+                    passwordcontroller),
+              ),
+              SizedBox(
+                height: 72.h,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 39.w, right: 43.w),
+                child: customBtn(
+                  50.h,
+                  332.w,
+                  MyColors.lightYellow,
+                  Colors.transparent,
+                  80.r,
+                  () {
+                    if (emailcontroller.text == '' &&
+                        passwordcontroller.text == '') {
+                      AwesomeDialog(
+                              context: context,
+                              animType: AnimType.SCALE,
+                              dialogType: DialogType.ERROR,
+                              body: Center(
+                                child: Text(
+                                  'Email & Password must be filled!',
+                                  style: TextStyle(fontStyle: FontStyle.italic),
+                                ),
+                              ),
+                              btnOkOnPress: () {},
+                              width: 350.w,
+                              btnOkColor: MyColors.lightYellow)
+                          .show();
+                    } else {
+                      AwesomeDialog(
+                        context: context,
+                        animType: AnimType.SCALE,
+                        dialogType: DialogType.SUCCES,
+                        body: Center(
+                          child: Text(
+                            'Are you sure to login',
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                        ),
+                        btnCancelOnPress: () {
+                          setState(() {
+                            emailcontroller.clear();
+                            passwordcontroller.clear();
+                          });
+                        },
+                        btnOkOnPress: () {
+                          myservices.signup(
+                              emailcontroller.text, passwordcontroller.text);
+                          if (myservices.error == "exists") {
+                            AwesomeDialog(
+                                    context: context,
+                                    animType: AnimType.SCALE,
+                                    dialogType: DialogType.ERROR,
+                                    body: Center(
+                                      child: Text(
+                                        'The user is already exist!',
+                                        style: TextStyle(
+                                            fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                    btnOkOnPress: () {},
+                                    width: 350.w,
+                                    btnOkColor: MyColors.lightYellow)
+                                .show();
+                          }
+                        },
+                      ).show();
+                    }
+                  },
+                  Customtext('LOGIN', MyColors.darkBlack, 20.sp, FontWeight.w600,
+                      TextAlign.center),
+                ),
+              ),
+              SizedBox(
+                height: 57.33.h,
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Customtext('POCKET', MyColors.darkBlack, 22, FontWeight.w500,
+                  Container(
+                    height: 1.h,
+                    width: 100.w,
+                    color: MyColors.darkBlack,
+                  ),
+                  SizedBox(
+                    width: 5.w,
+                  ),
+                  Customtext('or', MyColors.darkBlack, 20.sp, FontWeight.bold,
                       TextAlign.center),
                   SizedBox(
-                    width: 10.w,
+                    width: 5.w,
                   ),
-                  Customtext('RECIPE', MyColors.yellow, 22, FontWeight.w500,
-                      TextAlign.center),
+                  Container(
+                    height: 1.h,
+                    width: 100.w,
+                    color: MyColors.darkBlack,
+                  ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 65.33.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 145.w, left: 39.w),
-              child: Customtext('Login to your Account', MyColors.darkBlack,
-                  18.sp, FontWeight.w400, TextAlign.start),
-            ),
-            SizedBox(
-              height: 40.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 39.w, right: 43.w),
-              child: customField(
-                  50.h,
-                  332.w,
-                  80.r,
-                  MyColors.white,
-                  Color(0xffEEE2BE),
-                  Icon(Icons.person),
-                  'Email',
-                  false,
-                  emailcontroller),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 39.w, right: 43.w),
-              child: customField(
-                  50.h,
-                  332.w,
-                  80.r,
-                  MyColors.white,
-                  Color(0xffEEE2BE),
-                  Icon(Icons.lock),
-                  'Password',
-                  true,
-                  passwordcontroller),
-            ),
-            SizedBox(
-              height: 72.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 39.w, right: 43.w),
-              child: customBtn(
-                50.h,
-                332.w,
-                MyColors.lightYellow,
-                Colors.transparent,
-                80.r,
-                () {
-                  if (emailcontroller.text == '' &&
-                      passwordcontroller.text == '') {
-                    AwesomeDialog(
-                            context: context,
-                            animType: AnimType.SCALE,
-                            dialogType: DialogType.ERROR,
-                            body: Center(
-                              child: Text(
-                                'Email & Password must be filled!',
-                                style: TextStyle(fontStyle: FontStyle.italic),
-                              ),
-                            ),
-                            btnOkOnPress: () {},
-                            width: 350.w,
-                            btnOkColor: MyColors.lightYellow)
-                        .show();
-                  } else {
-                    AwesomeDialog(
-                      context: context,
-                      animType: AnimType.SCALE,
-                      dialogType: DialogType.SUCCES,
-                      body: Center(
-                        child: Text(
-                          'Are you sure to login',
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        ),
-                      ),
-                      btnCancelOnPress: () {
-                        setState(() {
-                          emailcontroller.clear();
-                          passwordcontroller.clear();
-                        });
-                      },
-                      btnOkOnPress: () {
-                        myservices.signup(
-                            emailcontroller.text, passwordcontroller.text);
-                        if (myservices.error == "exists") {
-                          AwesomeDialog(
-                                  context: context,
-                                  animType: AnimType.SCALE,
-                                  dialogType: DialogType.ERROR,
-                                  body: Center(
-                                    child: Text(
-                                      'The user is already exist!',
-                                      style: TextStyle(
-                                          fontStyle: FontStyle.italic),
-                                    ),
-                                  ),
-                                  btnOkOnPress: () {},
-                                  width: 350.w,
-                                  btnOkColor: MyColors.lightYellow)
-                              .show();
-                        }
-                      },
-                    ).show();
-                  }
-                },
-                Customtext('LOGIN', MyColors.darkBlack, 20.sp, FontWeight.w600,
-                    TextAlign.center),
+              SizedBox(
+                height: 41.6.h,
               ),
-            ),
-            SizedBox(
-              height: 57.33.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 1.h,
-                  width: 100.w,
-                  color: MyColors.darkBlack,
-                ),
-                SizedBox(
-                  width: 5.w,
-                ),
-                Customtext('or', MyColors.darkBlack, 20.sp, FontWeight.bold,
-                    TextAlign.center),
-                SizedBox(
-                  width: 5.w,
-                ),
-                Container(
-                  height: 1.h,
-                  width: 100.w,
-                  color: MyColors.darkBlack,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 41.6.h,
-            ),
-            Customtext('Continue With', MyColors.blue, 13.sp, FontWeight.w200,
-                TextAlign.center),
-            SizedBox(
-              height: 20.h,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 39.w, right: 43.w),
-              child: customBtn(
-                  50.h,
-                  332.w,
-                  MyColors.white,
-                  MyColors.darkBlack,
-                  80.r,
-                  () {},
-                  Customtext('As a Guest', MyColors.darkBlack, 20.sp,
-                      FontWeight.w400, TextAlign.center)),
-            ),
-            SizedBox(
-              height: 99.h,
-            ),
-          ],
+              Customtext('Continue With', MyColors.blue, 13.sp, FontWeight.w200,
+                  TextAlign.center),
+              SizedBox(
+                height: 20.h,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 39.w, right: 43.w),
+                child: customBtn(
+                    50.h,
+                    332.w,
+                    MyColors.white,
+                    MyColors.darkBlack,
+                    80.r,
+                    () {},
+                    Customtext('As a Guest', MyColors.darkBlack, 20.sp,
+                        FontWeight.w400, TextAlign.center)),
+              ),
+              Container(
+                height: 73,
+              )
+            ],
+          ),
         ),
       ),
     );

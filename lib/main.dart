@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:pocket_recipe/Screens/home.dart';
+import 'package:pocket_recipe/Screens/loginPage.dart';
 import 'package:pocket_recipe/Screens/splash_screen.dart';
 
 void main() async {
@@ -17,6 +19,6 @@ void main() async {
             transitionDuration: Duration(seconds: 2),
             defaultTransition: Transition.native,
             debugShowCheckedModeBanner: false,
-            home: SplashScreen(),
+            home: Home(),
           )));
 }

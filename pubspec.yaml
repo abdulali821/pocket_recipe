@@ -37,6 +37,7 @@ dependencies:
   slide_to_act: ^2.0.1
   device_preview: ^0.7.4
   awesome_dialog: ^2.1.1
+  provider: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +58,7 @@ flutter:
   assets:
     - assets/images/
     - assets/logo/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
