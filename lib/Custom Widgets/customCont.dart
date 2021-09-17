@@ -19,9 +19,12 @@ Widget container(
         ListTile(
           title: Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold,color: MyColors.white),
+            style:
+                TextStyle(fontWeight: FontWeight.bold, color: MyColors.white),
           ),
-          subtitle: Text(subtitle),
+          subtitle: Text(subtitle,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: MyColors.white)),
         ),
       ],
     ),

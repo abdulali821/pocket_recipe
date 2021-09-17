@@ -126,6 +126,35 @@ class _HomeState extends State<Home> {
             );
           },
         ),
+        drawer: Drawer(
+          elevation: 20,
+          child: Container(
+            color: MyColors.lightYellow,
+            child: Stack(
+              children: [
+                Column(
+                  children: [
+                    Image.asset('assets/logo/logo.png'),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Customtext('POCKET', MyColors.darkBlack, 22,
+                              FontWeight.w500, TextAlign.center),
+                          SizedBox(
+                            width: 10.w,
+                          ),
+                          Customtext('RECIPE', MyColors.white, 22,
+                              FontWeight.w500, TextAlign.center),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
