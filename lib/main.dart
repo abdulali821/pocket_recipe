@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pocket_recipe/Screens/home.dart';
 import 'package:pocket_recipe/Screens/loginPage.dart';
+import 'package:pocket_recipe/Screens/recipeDetails.dart';
 import 'package:pocket_recipe/Screens/splash_screen.dart';
 
 void main() async {

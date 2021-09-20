@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class MyProvider extends ChangeNotifier {
   int indexList = 0;
+  bool isOn = true;
   final List<String> category = [
     'All',
     'Chineese',
@@ -19,4 +20,9 @@ class MyProvider extends ChangeNotifier {
     indexList = i;
     notifyListeners();
   }
+  void isSwitchOn(bool isOff){
+    isOn = isOff;
+    notifyListeners();
+  }
 }
+

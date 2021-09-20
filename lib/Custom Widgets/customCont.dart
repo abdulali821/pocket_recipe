@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pocket_recipe/Custom%20Widgets/colors.dart';
 
 Widget container(
+  NetworkImage image,
   String title,
   String subtitle,
 ) {
@@ -9,8 +10,7 @@ Widget container(
     height: 100,
     width: 100,
     decoration: BoxDecoration(
-      image: DecorationImage(
-          image: AssetImage('assets/images/onboard.png'), fit: BoxFit.fill),
+      image: DecorationImage(image: image, fit: BoxFit.fill),
       borderRadius: BorderRadius.circular(20),
     ),
     child: Column(
